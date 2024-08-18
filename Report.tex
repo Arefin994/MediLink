@@ -1,0 +1,1351 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage[myheadings]{fullpage}
+\DeclareUnicodeCharacter{0301}{\hspace{-1ex}\'{ }}
+% Package for headers 
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+% For figures and stuff
+\usepackage{graphicx, wrapfig, subcaption, setspace, booktabs}
+\usepackage[T1]{fontenc}
+
+% Change for different font sizes and families
+\usepackage[font=small, labelfont=bf]{caption}
+\usepackage{fourier}
+\usepackage[protrusion=true, expansion=true]{microtype}
+
+%longtable
+\usepackage{longtable}
+\usepackage{caption}
+\captionsetup[table]{skip=12pt}
+
+% Maths
+\usepackage{amsmath,amssymb}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+% Bibliography
+\usepackage{biblatex} 
+\addbibresource{references.bib}
+
+%% Language and font encodings
+\usepackage[english]{babel}
+\usepackage{csquotes}
+
+
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+\onehalfspacing
+\setcounter{tocdepth}{5}
+\setcounter{secnumdepth}{5}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{lightgray}{gray}{0.95}
+
+\lstset{
+    backgroundcolor=\color{lightgray},
+    basicstyle=\ttfamily,
+    columns=fullflexible,
+    breaklines=true,
+    breakatwhitespace=true,
+    showspaces=false,
+    showstringspaces=false,
+    frame=single,
+    xleftmargin=1.5em,
+    xrightmargin=1.5em,
+    framesep=1em
+}
+
+
+%% Sets page size and margins
+\usepackage[a4paper,top=2cm,bottom=1.5cm,left=2cm,right=2cm,marginparwidth=1.5cm]{geometry}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% Header and footer information
+\setlength\headheight{15pt}
+\fancyhead[L]{} 
+\fancyhead[R]{\textit{Report on Database Project}}
+\fancyfoot[R]{\thepage}
+ \setlength {\marginparwidth }{2cm}
+\begin{document}
+
+\date{}
+
+% Do not change anything here except in \LARGE \textbf{This is the title of the essay} 
+% /hline before and after the title makes those horoziontal lines appear, you can change the appearance by changing the 2pt to different sizees
+\title{ \normalsize 
+		\\ [1.0cm]
+		% Change to your faculty if needed
+		\includegraphics[width=45mm]{img/Logo-NSU.png}  \\[.5cm]
+		   \\[.5cm]
+		\normalsize  \\ [1.0cm]
+		Report on\\
+		\HRule{2pt} \\
+		\LARGE \textbf{MediLink Database Project} %para que quede encerrado en las lineas
+		\HRule{2pt} \\ [0.5cm]
+		\normalsize \today \vspace*{5\baselineskip}}
+		
+\date{}
+
+\author{
+        Prepared By: \\[0.5cm]
+		2221766642, Arefin Amin\\
+        2222904042, Fatema Tabassum Elma\\
+        2221370642, Md. Ishzaz Asif Rafid\\
+        2131272042, Sabbir Hossain\\ \\
+        Course Instructor:        \\[0.5cm]
+		Prof. Dr. Kamruddin Nur \\
+		%Professor, Dept. of Computer Science \\
+        \texttt{}
+		 }
+		 
+\maketitle
+
+\newpage
+
+\tableofcontents
+%\newpage
+\clearpage
+\listoffigures
+\clearpage
+\listoftables
+\clearpage
+
+
+\clearpage
+\section*{Project Overview}
+% Add your own abstract here
+The healthcare needs of Dhaka residents are diverse and complex, necessitating a comprehensive and user-friendly database system to streamline access to medical services. Our project aims to develop such a system, designed specifically to simplify the process of finding suitable healthcare providers, including doctors, pharmacies, veterinarians, homeopathic practitioners, and blood donors. By organizing essential information and facilitating easy searches, we aim to enhance the healthcare experience for Dhaka residents. 
+
+
+
+\section*{Contributions}
+\begin{center}
+\begin{table}[h]
+\centering
+\caption{Team Contributions}
+\vspace{10pt}
+\begin{tabular}{|c|c|p{8cm}|c|}
+  \hline
+  ID & Name & Tasks & Percentage \\ \hline
+  2221766642 & Arefin Amin & Table [Patient, Consultation, Blood Donor], Query[5, 6, 7, 8] \newline Conceptual UML, Logical UML, \newlin normalization  \newline Organizing the report & 25\% \\ \hline
+  2222904042 & Fatema Tabassum Elma & Table [ Medicine,Pharmacy,Medicine Availability], \newline Query[9, 10, 11, 12] \newline Logical UML  \newline Physical Design Diagram \newline Project objective and project deliverable & 25\% \\ \hline
+  2221370642 & Md. Ishzaz Asif Rafid & Table [ Hospital, Doctor, Symptom], \newline Query
+[1, 2, 3, 4,17,18,19],\newline Conceptual UML, Logical UML \newline Conclusion, Acknowledgments, Normalization& 25\% \\ \hline
+  2131272042 & Sabbir Hossain & Table [Delivery, Prescription, Review, ], \newline Query[13, 14, 15, 16]  \newline Logical UML, \newline Organizing the report, Physical Diagram, Project Overview   & 25\% \\ \hline
+\end{tabular}
+\label{fig:figure2}
+\end{table}
+\end{center}
+
+
+\clearpage
+
+\section{MediLink}
+\section{Project Description}
+Our goal is to develop a user-friendly healthcare database tailored to the needs of Dhaka residents. The system aims to simplify the process of finding suitable doctors by organizing vital information, including doctor profiles, patient reviews, and regional availability. Users can easily locate nearby healthcare providers through a regional search, accessing comprehensive profiles of doctors with details on specialties and services. Patient input is encouraged, allowing users to share symptoms and medical history for personalized recommendations. A rating system based on expertise and patient satisfaction will assist users in assessing the quality of care. Beyond human doctors, the platform integrates pharmacy information, enabling users to check medicine availability at nearby pharmacies. The database also includes categories for pet doctors/veterinarians, homeopathic practitioners, and enthusiastic blood donors, facilitating quick access to alternative healthcare options and blood donation information during emergencies. Our platform aims to streamline healthcare information, making it easily accessible and user-friendly for the residents of Dhaka city.
+
+\section{Project Objective}
+The objectives of this projects are:
+\begin{enumerate}
+    \item Develop a user-friendly healthcare database for Dhaka residents.
+    \item Enable easy access to nearby healthcare providers through regional search functionality.
+    \item Provide comprehensive doctor profiles with specialties and services for informed decision-making.
+    \item Implement a rating system to assess the quality of care based on expertise and patient satisfaction.
+    \item Integrate pharmacy information and categories for alternative healthcare options and blood donors.
+\end{enumerate}
+
+\section{Project Deliverable}
+\begin{enumerate}
+    \item Database Structure: A well-designed and organized database schema tailored to store healthcare information efficiently.
+    \item A comprehensive data model outlining the relationships between different entities and attributes within the database.
+    \item Sample Data Population: Population of the database with sample healthcare data to demonstrate functionality and test queries.
+    \item Quality Assurance Reports: Reports on database testing and validation procedures to ensure data integrity, consistency, and performance.
+\end{enumerate} 
+
+
+
+
+
+\section{Design}
+
+
+\subsection{Conceptual Design Diagram}
+Conceptual design diagram in this section. Sample image insertion is shown below
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{CleanShot 2024-05-25 at 15.20.25@2x.png}
+    \caption{Conceptual design of the database}
+    \label{fig:1}
+\end{figure}
+
+\subsection{Logical Design Diagram}
+Logical design diagram in this section. Sample image insertion is shown in Figure \ref{fig:2}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{CleanShot 2024-05-25 at 15.14.47@2x.png}
+    \caption{Logical design of the database}
+    \label{fig:2}
+\end{figure}
+
+
+
+\subsection{Physical Design Diagram}
+Physical design diagram in this section. Sample image insertion shown in Figure \ref{fig:3}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.1\textwidth]{Medilink Physical Diagram (Final).png}
+    \caption{Physical design of the database}
+    \label{fig:3}
+\end{figure}
+
+
+
+
+\subsection{Normalization}
+In this section, we discuss the normalization of various tables within the `medilink` database. The process ensures data integrity and establishes relationships between the tables through foreign key constraints.
+\subsubsection{Delivery Table}
+\begin{lstlisting}[language=SQL]
+ALTER TABLE medilink.`delivery` 
+ADD CONSTRAINT Ph_id
+  FOREIGN KEY (PH_id)
+  REFERENCES medilink.`pharmacy` (PharmID)
+  ON DELETE  set null
+  ON UPDATE  cascade;
+
+ALTER TABLE medilink.`delivery` 
+ADD CONSTRAINT p_id
+  FOREIGN KEY (p_id)
+  REFERENCES medilink.`patients` (p_id)
+  ON DELETE set null
+  ON UPDATE cascade;
+\end{lstlisting}
+
+\subsubsection{Blood Donor Table}
+\begin{lstlisting}[language=SQL]
+ALTER TABLE medilink.`blood_donor` 
+ADD CONSTRAINT h_id
+  FOREIGN KEY (h_id)
+  REFERENCES medilink.`hospital` (id)
+  ON DELETE  set null
+  ON UPDATE  cascade;
+\end{lstlisting}
+
+\subsubsection{Consultation Table}
+\begin{lstlisting}[language=SQL]
+ALTER TABLE medilink.`consultation` 
+ADD CONSTRAINT PatientID
+  FOREIGN KEY (PatientID)
+  REFERENCES medilink.`patients` (P_id)
+  ON DELETE  no action
+  ON UPDATE  no action;
+
+ALTER TABLE medilink.`consultation` 
+ADD CONSTRAINT DoctorID
+  FOREIGN KEY (DoctorID)
+  REFERENCES medilink.`doctor` (Did)
+  ON DELETE no action
+  ON UPDATE no action;
+\end{lstlisting}
+
+\subsubsection{Pharmacy Table}
+\begin{lstlisting}[language=SQL]
+ALTER TABLE medilink.`pharmacy` 
+ADD CONSTRAINT HospID
+  FOREIGN KEY (HospID)
+  REFERENCES medilink.`hospital` (id)
+  ON DELETE cascade
+  ON UPDATE cascade;
+\end{lstlisting}
+
+\subsubsection{Medicine Availability Table}
+\begin{lstlisting}[language=SQL]
+ALTER TABLE medilink.`medicine_availability` 
+ADD CONSTRAINT PharmID
+  FOREIGN KEY (PharmID)
+  REFERENCES medilink.`pharmacy` (PharmID)
+  ON DELETE cascade
+  ON UPDATE cascade;
+
+ALTER TABLE medilink.`medicine_availability`
+ADD CONSTRAINT fk_medicine_availability_medid
+  FOREIGN KEY (MedID)
+  REFERENCES medilink.`medicine` (MedID)
+  ON DELETE cascade
+  ON UPDATE cascade;
+\end{lstlisting}
+
+\subsubsection{Prescription Table}
+\begin{lstlisting}[language=SQL]
+ALTER TABLE medilink.`prescription` 
+ADD CONSTRAINT d_id
+  FOREIGN KEY (d_id)
+  REFERENCES medilink.`doctor` (Did)
+  ON DELETE set null
+  ON UPDATE cascade;
+
+ALTER TABLE medilink.`prescription` 
+ADD CONSTRAINT P_id
+  FOREIGN KEY (P_id)
+  REFERENCES medilink.`patients` (P_id)
+  ON DELETE no action
+  ON UPDATE no action;
+\end{lstlisting}
+
+\subsubsection{Review Table}
+\begin{lstlisting}[language=SQL]
+ALTER TABLE medilink.`review`
+ADD CONSTRAINT FK_PatientID_Review 
+FOREIGN KEY (P_id)
+REFERENCES medilink.`patients` (P_id)
+ON DELETE  cascade
+ON UPDATE  cascade;
+
+ALTER TABLE medilink.`review`
+ADD CONSTRAINT Fk_D_id  
+FOREIGN KEY (D_id)
+REFERENCES medilink.`Doctor` (Did)
+ON DELETE  cascade
+ON UPDATE  cascade;
+\end{lstlisting}
+
+\subsubsection{Symptom Table}
+\begin{lstlisting}[language=SQL]
+ALTER TABLE medilink.`symptom`
+ADD CONSTRAINT Req_Med_ID  
+FOREIGN KEY (Req_Med_ID)
+REFERENCES medilink.`medicine` (MedID)
+ON DELETE NO action
+ON UPDATE  cascade;
+\end{lstlisting}
+
+
+
+
+
+
+\section{Implementation}
+\subsection{Data 
+Population} 
+\textbf{Sample data input from prescription table :}
+\newline
+\newline
+\begin{lstlisting}
+    
+INSERT INTO Prescription (Pr_id,  P_id,  MD_content)
+
+VALUES
+("Pr001", "P027", "Aspidol"),
+
+("Pr001", "P027", "Nitrostat"),
+
+("Pr001", "P027", "Lopressor"),
+
+("Pr002", "P082", "Humalog"),
+
+("Pr002", "P082", "Diabeta"),
+
+("Pr002", "P082", "ProAir HFA"),
+
+("Pr003", "P001", "Flonase"),
+
+("Pr003", "P001", "Singulair"),
+
+("Pr003",  "P001", "Zovirax"),
+
+("Pr003", "P019", "Humalog"),
+
+("Pr003", "P019", "Zestril");
+
+\end{lstlisting}
+\newline
+\newline
+
+\textbf{ Query for showing all the data from prescription table:} 
+
+SELECT * FROM medilink.prescription;
+\newline
+\newline
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Prescription Table .png}
+    \caption{Showing The Prescription Table All Data}
+    \label{fig:Showing the Data from prescription table}
+\end{figure}
+\newline
+\newline
+
+\textbf{Sample data input for Review table :}
+
+\begin{lstlisting}
+INSERT INTO Review (P_id, D_Id, HospitalId, Review, Rating)
+VALUES
+("P051", "D027", "BDH002", "Great experience overall. Doctor was very attentive and helpful.", 5),
+("P036", "D065", "BDH009", "Wait time was too long, but the doctor was knowledgeable and friendly.", 4),
+("P071", "D032", "BDH015", "Excellent service. Doctor took time to explain everything thoroughly.", 5),
+("P019", "D049", "BDH011", "Disappointing experience. Doctor seemed disinterested and rushed through appointment.", 2),
+("P045", "D084", "BDH025", "Very satisfied with the treatment received. Doctor was caring and professional.", 4),
+("P063", "D073", "BDH018", "Average experience. Doctor was okay, but nothing exceptional.", 3),
+("P095", "D067", "BDH008", "The doctor was fantastic! Really went above and beyond to address my concerns.", 5),
+("P087", "D012", "BDH017", "Unsatisfactory experience. Doctor didn't seem to know much about my condition.", 2),
+("P082", "D035", "BDH022", "Exceptional service! Doctor was incredibly knowledgeable and caring.", 5),
+("P042", "D086", "BDH013", "Mediocre experience. Doctor seemed distracted during the appointment.", 3),
+("P078", "D042", "BDH020", "Overall satisfied with the service provided by the doctor.", 4),
+("P041", "D057", "BDH019", "Very disappointed with the doctor's attitude. Seemed very dismissive of my concerns.", 2),
+("P011", "D048", "BDH010", "Fantastic doctor! Really took the time to listen and address all my concerns.", 5),
+("P059", "D009", "BDH007", "The doctor was excellent. Very professional and knowledgeable.", 4),
+("P049", "D093", "BDH003", "Below average experience. Doctor didn't seem very interested in my case.", 3);
+\end{lstlisting}
+\textbf{Query for showing all the values from review table:}
+\begin{lstlisting}
+
+SELECT * FROM medilink.review;
+\end{lstlisting}
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{reviewsql.png}
+    \caption{Showing The Review Table All Data}
+    \label{fig:1}
+\end{figure}
+
+\newline
+\newline
+\newline
+
+ \textbf{{Sample data input for Delivery Table:}}
+\begin{lstlisting}
+
+INSERT INTO Delivery (De_id, P_id, P_number, PH_id, De_name, De_time, De_content, De_status, De_location,
+De_number, De_price) VALUES
+
+("De050", "P050", '01849798985', "PH050", "Rahim", '2024-04-21 15:20:00', '1. Aspidol (20 pcs), 2. Nitrostat (10 pcs), 3. Lopressor (30 pcs)', "Delivered", '1016/B, Paltan, Dhaka', '01746793985', '500'),
+
+("De051", "P051", '01448798985', "PH051", "Hasan", '2024-07-22 15:40:00', '1. Tylenol (20 pcs), 2. Robitussin (10 pcs), 3. ProAir HFA (30 pcs)', "On The Way", '1027/X, Turag, Dhaka', '01889353339', '1270'),
+
+("De052", "P052", '01348798985', "PH052", "Sakib", '2024-08-22 15:45:00', '1. Tamiflu (20 pcs), 2. Tylenol (10 pcs), 3. Sudafed PE (30 pcs)', "Delivered", '1027/Y, Uttara, Dhaka', '01989353341', '1310'),
+
+("De053", "P053", '01949798985', "PH053", "Arif", '2024-09-22 15:50:00', '1. Synthroid (20 pcs), 2. Tums (10 pcs), 3. SSKI (30 pcs)', "Pending", '1027/Z, Uttara, Dhaka', '01389353343', '1350'),
+
+("De054", "P054", '01849798985', "PH054", "Rasel", '2024-10-22 15:55:00', '1. Actigall (20 pcs), 2. Zofran (10 pcs), 3. Hemochron (30 pcs)', "On The Way", '1027/AA, Uttara, Dhaka', '01789353345', '1420'),
+
+("De055", "P055", '01749798985', "PH055", "Shuvo", '2024-11-22 16:00:00', '1. Prilosec (20 pcs), 2. Zantac (10 pcs), 3. Pepcid (30 pcs)', "Delivered", '1027/AB, Uttara, Dhaka', '01689353347', '1390'),
+
+("De056", "P056", '01649798985', "PH056", "Sakil", '2024-12-22 16:05:00', '1. Temovate (20 pcs), 2. Dovonex (10 pcs), 3. Psoriasin (30 pcs)', "Pending", '1027/AC, Uttara, Dhaka', '01589353349', '1460'),
+
+("De057", "P057", '01549798985', "PH057", "Imran", '2024-01-22 16:10:00', '1. Lasix (20 pcs), 2. Epogen (10 pcs), 3. Rocaltrol (30 pcs)', "On The Way", '1027/AD, Uttara, Dhaka', '01489353351', '1550'),
+
+("De058", "P058", '01449798985', "PH058", "Rony", '2024-02-22 16:15:00', '1. Zoloft (20 pcs), 2. Ativan (10 pcs), 3. Buspar (30 pcs)', "Delivered", '1027/AE, Uttara, Dhaka', '01389353353', '1480'),
+
+("De059", "P059", '01950798985', "PH059", "Nasim", '2024-03-22 16:20:00', '1. Sovaldi (20 pcs), 2. Tylenol (10 pcs), 3. Xalatan (30 pcs)', "Pending", '1027/AF, Uttara, Dhaka', '01989353355', '1520'),
+
+("De060", "P060", '01850798985', "PH060", "Sohag", '2024-04-22 16:25:00', '1. Trabeculectomy (20 pcs), 2. Tylenol (10 pcs), 3. Advil (30 pcs)', "On The Way", '1027/AG, Uttara, Dhaka', '01889353357', '1490'),
+
+("De061", "P061", '01750798985', "PH061", "Sujan", '2024-05-22 16:30:00', '1. Kenalog (20 pcs), 2. Hemochron (10 pcs), 3. Activase (30 pcs)', "Delivered", '1027/AH, Uttara, Dhaka', '01789353359', '1560'),
+
+("De062", "P062", '01650798985', "PH062", "Sumon", '2024-06-22 16:35:00', '1. Oxygen therapy (20 pcs), 2. Colcrys (10 pcs), 3. Indocin (30 pcs)', "Pending", '1027/AI, Uttara, Dhaka', '01689353361', '1630'),
+
+("De063", "P063", '01550798985', "PH063", "Shamim", '2024-07-22 16:40:00', '1. Deltasone (20 pcs), 2. Imuran (10 pcs), 3. Apriso (30 pcs)', "On The Way", '1027/AJ, Uttara, Dhaka', '01589353363', '1700'),
+
+("De064", "P064", '01450798985', "PH064", "Sajjad", '2024-08-22 16:45:00', '1. Entocort (20 pcs), 2. Aricept (10 pcs), 3. Namenda (30 pcs)', "Delivered", '1027/AK, Uttara, Dhaka', '01489353365', '1670'),
+
+("De065", "P065", '01951798985', "PH065", "Nazrul", '2024-09-22 16:50:00', '1. Zoloft (20 pcs), 2. Trexall (10 pcs), 3. Azulfidine (30 pcs)', "Pending", '1027/AL, Uttara, Dhaka', '01389353367', '1740'),
+
+("De066", "P066", '01851798985', "PH066", "Rabbi", '2024-10-22 16:55:00', '1. Deltasone (20 pcs), 2. Advil (10 pcs), 3. Zofran (30 pcs)', "On The Way", '1027/AM, Uttara, Dhaka', '01289353369', '1810');
+\end{lstlisting}
+
+\newline
+
+\textbf{Query for showing all the data from delivery table: 
+}
+\begin{lstlisting}
+
+        SELECT * FROM 
+     medilink.delivery;
+\end{lstlisting}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Delivery table.png}
+    \caption{Showing The Delivery Table All Data}
+    \label{fig:1}
+\end{figure}
+
+\newline
+\newline
+\textbf{Sample data input from doctor table :}
+\begin{lstlisting}
+INSERT INTO Doctor (DId, DName, Certificates, ConsultantionHours, Specialization, Visit, Hospitalid)
+
+VALUES
+
+    ('D301', 'Dr. Aminul Islam', 'MBBS, FCPS', '8:00 AM - 11:00 AM', 'Gynecology', 22, (SELECT CONCAT('BDH', LPAD(FLOOR(RAND() * 110) + 1, 3, '0')) AS RandomHospitalId)),
+    
+    ('D302', 'Dr. Shamsul Haque', 'MBBS, MD', '10:00 AM - 2:00 PM', 'Orthopedics', 16, (SELECT CONCAT('BDH', LPAD(FLOOR(RAND() * 110) + 1, 3, '0')) AS RandomHospitalId)),
+    
+    ('D303', 'Dr. Rehana Akhter', 'MBBS, FCPS', '8:00 AM - 11:00 AM', 'Gynecology', 20, (SELECT CONCAT('BDH', LPAD(FLOOR(RAND() * 110) + 1, 3, '0')) AS RandomHospitalId)),
+    
+    ('D304', 'Dr. Khaled Ahmed', 'MBBS, MRCP', '2:00 PM - 6:00 PM', 'Endocrinology', 19, (SELECT CONCAT('BDH', LPAD(FLOOR(RAND() * 110) + 1, 3, '0')) AS RandomHospitalId)),
+    
+    ('D305', 'Dr. Nazma Begum', 'MBBS, FCPS', '9:00 AM - 12:00 PM', 'Ophthalmology', 21, (SELECT CONCAT('BDH', LPAD(FLOOR(RAND() * 110) + 1, 3, '0')) AS RandomHospitalId)),
+    
+    ('D306', 'Dr. Aminul Islam', 'MBBS, MD', '10:00 AM - 2:00 PM', 'Neurology', 16, (SELECT CONCAT('BDH', LPAD(FLOOR(RAND() * 110) + 1, 3, '0')) AS RandomHospitalId)),
+    
+    ('D307', 'Dr. Shamsul Haque', 'MBBS, FCPS', '8:00 AM - 11:00 AM', 'Pediatrics', 20, (SELECT CONCAT('BDH', LPAD(FLOOR(RAND() * 110) + 1, 3, '0')) AS RandomHospitalId)),
+    
+    ('D318', 'Dr. Rehana Akhter', 'MBBS, MD', '10:00 AM - 2:00 PM', 'Orthopedics', 16, (SELECT CONCAT('BDH', LPAD(FLOOR(RAND() * 110) + 1, 3, '0')) AS RandomHospitalId)),
+    
+    ('D319', 'Dr. Khaled Ahmed', 'MBBS, FCPS', '8:00 AM - 11:00 AM', 'Gynecology', 20, (SELECT CONCAT('BDH', LPAD(FLOOR(RAND() * 110) + 1, 3, '0')) AS RandomHospitalId)),
+    
+    ('D320', 'Dr. Nazma Begum', 'MBBS, MD', '2:00 PM - 6:00 PM', 'Endocrinology', 19, (SELECT CONCAT('BDH', LPAD(FLOOR(RAND() * 110) + 1, 3, '0')) AS RandomHospitalId)),
+    
+    ('D321', 'Dr. Aminul Islam', 'MBBS, FCPS', '9:00 AM - 12:00 PM', 'Ophthalmology', 21, (SELECT CONCAT('BDH', LPAD(FLOOR(RAND() * 110) + 1, 3, '0')) AS RandomHospitalId)),
+    
+    ('D322', 'Dr. Shamsul Haque', 'MBBS, MD', '10:00 AM - 2:00 PM', 'Neurology', 16, (SELECT CONCAT('BDH', LPAD(FLOOR(RAND() * 110) + 1, 3, '0')) AS RandomHospitalId));
+\end{lstlisting}
+\newline
+\newline
+\newline
+
+\textbf{Query for showing all the data from doctor table: }
+
+SELECT * FROM medilink.doctor;
+\end{lstlisting}
+\newline
+\newline
+\newline
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Doctorsql.png}
+    \caption{Showing The Doctor Table All Data}
+    \label{fig:1}
+\end{figure}
+\newline
+\newline
+\textbf{Sample data input from Hospital:}
+\begin{lstlisting}
+INSERT INTO Hospital (Id, Name, Location, NumberOfDoctor)
+
+VALUES
+
+    ('BDH091', 'Chittagong General Hospital', 'Chittagong, Bangladesh', 220),
+    
+    ('BDH092', 'Maa Shishu O General Hospital', 'Chittagong, Bangladesh', 260),
+    
+    ('BDH093', 'Max Hospital Chittagong', 'Chittagong, Bangladesh', 290),
+    
+    ('BDH094', 'Metropolitan Hospital Ltd.', 'Chittagong, Bangladesh', 230),
+    
+    ('BDH095', 'Parkway Hospitals Singapore', 'Dhaka, Bangladesh', 280),
+    
+    ('BDH096', 'Rangpur Community Medical College Hospital', 'Rangpur, Bangladesh', 250),
+    
+    ('BDH097', 'Rangpur General Hospital', 'Rangpur, Bangladesh', 220),
+    
+    ('BDH098', 'Rangpur Medical College Hospital', 'Rangpur, Bangladesh', 300),
+    
+    ('BDH099', 'Rangpur Metropolitan Hospital', 'Rangpur, Bangladesh', 270),
+    
+    ('BDH100', 'Rangpur Red Crescent Maternity Hospital', 'Rangpur, Bangladesh', 240),
+    
+    ('BDH101', 'Rangpur Red Crescent Medical College Hospital', 'Rangpur, Bangladesh', 320),
+    
+    ('BDH102', 'Sheikh Hasina Medical College Hospital', 'Tangail, Bangladesh', 250),
+    
+    ('BDH103', 'Shahid Ziaur Rahman Medical College Hospital', 'Bogra, Bangladesh', 280),
+    
+    ('BDH104', 'Sylhet Women’s Medical College Hospital', 'Sylhet, Bangladesh', 220),
+    
+    ('BDH105', 'Uttara Adhunik Medical College Hospital', 'Dhaka, Bangladesh', 260),
+    
+    ('BDH106', 'Uttara Central Hospital Limited', 'Dhaka, Bangladesh', 300),
+    
+    ('BDH107', 'Uttara Crescent Hospital Limited', 'Dhaka, Bangladesh', 230),
+    
+    ('BDH108', 'Uttara Modern Hospital Ltd.', 'Dhaka, Bangladesh', 280),
+    
+    ('BDH109', 'Women’s Medical College Hospital', 'Dhaka, Bangladesh', 250),
+    
+    ('BDH110', 'Z.H. Sikder Women’s Medical College Hospital', 'Dhaka, Bangladesh', 210);
+\end{lstlisting}
+
+\textbf{Query for showing all the data from hospital table: }
+\begin{lstlisting}
+SELECT * FROM medilink.hospital;
+\end{lstlisting}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{hospital.PNG}
+    \caption{Showing The Hospital Table All Data}
+    \label{fig:1}
+\end{figure}
+
+\textbf{Sample data input from Symptoms:}
+
+\begin{lstlisting}
+INSERT INTO Symptoms (Disease, Symptom, Required_Medicine, TreatedBy) 
+
+VALUES
+
+('Heart Disease', 'Chest Pain', 'Aspirin', 'Cardiology'),
+
+('Heart Disease', 'Shortness of breath', 'Nitroglycerin', 'Cardiology'),
+
+('Heart Disease', 'Irregular heartbeat', 'Beta blockers', 'Cardiology'),
+
+('Diabetes', 'Frequent urination', 'Insulin', 'Endocrinology'),
+
+('Diabetes', 'Increased thirst', 'Metformin', 'Endocrinology'),
+
+('Diabetes', 'Blurred vision', 'Glyburide', 'Endocrinology'),
+
+('Asthma', 'Shortness of breath', 'Albuterol', 'Pulmonology'),
+
+('Asthma', 'Wheezing', 'Steroid inhaler', 'Pulmonology'),
+
+('Asthma', 'Coughing', 'Leukotriene modifiers', 'Pulmonology'),
+
+('Chickenpox', 'Itchy rash', 'Acyclovir', 'Pediatrics'),
+
+('Chickenpox', 'Fever', 'Ibuprofen', 'Pediatrics');
+
+\end{lstlisting}
+\textbf{Query for showing all the data from Symptoms table: }
+\begin{lstlisting}
+SELECT * FROM medilink.Symptoms;
+\end{lstlisting}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{symptoms.PNG}
+    \caption{Showing The Symptoms Table All Data}
+    \label{fig:1}
+\end{figure}
+
+% try 
+\textbf{Sample data input from Medicine:}
+\begin{lstlisting}
+INSERT INTO medicine (MedID, MedType,Medname, mPrice)
+
+VALUES
+
+('MD001', 'Aspirin', 'Aspidol', '50'),
+
+('MD002', 'Nitroglycerin', 'Nitrostat', '60'),
+
+('MD003', 'Metoprolol', 'Lopressor', '70'),
+
+('MD004', 'Insulin Lispro', 'Humalog', '80'),
+
+('MD005', 'Metformin', 'Glucophage', '45'),
+
+('MD006', 'Glyburide', 'Diabeta', '55'),
+
+('MD007', 'Albuterol', 'ProAir HFA', '40'),
+
+('MD008', 'Fluticasone', 'Flonase', '65'),
+
+('MD009', 'Montelukast', 'Singulair', '70'),
+
+('MD010', 'Acyclovir', 'Zovirax', '50'),
+
+('MD011', 'Ibuprofen', 'Advil', '35'),
+
+('MD012', 'Metformin Hydrochloride', 'Glucophage XR', '60'),
+
+('MD013', 'Fluticasone Propionate', 'Flovent', '75'),
+
+('MD014', 'Montelukast Sodium', 'Singulair', '80'),
+
+('MD015', 'Lisinopril', 'Zestril', '70'),
+
+('MD016', 'Amlodipine', 'Norvasc', '65'),
+
+('MD017', 'Hydrochlorothiazide', 'Microzide', '55'),
+
+('MD018', 'Methotrexate', 'Trexall', '90'),
+
+('MD019', 'Prednisone', 'Deltasone', '45'),
+
+('MD020', 'Sumatriptan', 'Imitrex', '75'),
+
+('MD021', 'Ondansetron', 'Zofran', '70'),
+
+('MD022', 'Propranolol', 'Inderal', '65'),
+
+('MD023', 'Azithromycin', 'Zithromax', '80'),
+
+('MD024', 'Acetaminophen', 'Tylenol', '40'),
+
+('MD025', 'Oxygen therapy', 'Oxygen therapy', '120'),
+
+('MD026', 'Fluoxetine', 'Prozac', '70');
+\end{lstlisting}
+
+\textbf{Query for showing all the data from Medicine table: }
+\begin{lstlisting}
+SELECT * FROM medilink.medicine;
+\end{lstlisting}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{medicine.PNG}
+    \caption{Showing The Medicine Table All Data}
+    \label{fig:1}
+\end{figure}
+
+
+\textbf{Sample data input from Medicine availability:}
+\begin{lstlisting}
+INSERT INTO medicine availability (PharmID, MedID, Quantity)
+
+VALUES
+
+('PH001', 'MD100', 30),
+
+('PH001', 'MD101', 40),
+
+('PH001', 'MD102', 25),
+
+('PH001', 'MD103', 35),
+
+('PH001', 'MD104', 45),
+
+('PH001', 'MD105', 20),
+
+('PH001', 'MD106', 50),
+
+('PH001', 'MD107', 30),
+
+('PH001', 'MD108', 40),
+
+('PH001', 'MD109', 35),
+
+('PH001', 'MD110', 45),
+
+('PH001', 'MD111', 25),
+
+('PH001', 'MD112', 30),
+
+('PH001', 'MD113', 40),
+
+('PH001', 'MD114', 35),
+
+('PH001', 'MD115', 20);
+
+\end{lstlisting}
+
+\textbf{Query for showing all the data from Medicine availability table: }
+\begin{lstlisting}
+SELECT * FROM medilink.medicineavailability;
+\end{lstlisting}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{medicine_availability.png}
+    \caption{Showing The Medicine Availability Table All Data}
+    \label{fig:1}
+\end{figure}
+
+
+
+ \textbf{Sample data input from Pharmacy:}
+
+\begin{lstlisting}
+INSERT INTO `pharmacy` (`PharmID`, `HospID`, `Location`, `Open`)
+VALUES
+
+('PH001', 'BDH001', 'Dhaka, Bangladesh', '9 am - 10 pm'),
+
+('PH002', 'BDH002', 'Dhaka, Bangladesh', '10 am - 9 pm'),
+
+('PH003', 'BDH003', 'Dhaka, Bangladesh', '8 am - 11 pm'),
+
+('PH004', 'BDH004', 'Dhaka, Bangladesh', '10:30 am - 8:30 pm'),
+
+('PH005', 'BDH005', 'Dhaka, Bangladesh', '9:30 am - 9:30 pm'),
+
+('PH006', 'BDH006', 'Chittagong, Bangladesh', '9 am - 10 pm'),
+
+('PH007', 'BDH007', 'Dhaka, Bangladesh', '9 am - 9 pm'),
+
+('PH008', 'BDH008', 'Dhaka, Bangladesh', '10 am - 8 pm'),
+
+('PH009', 'BDH009', 'Dhaka, Bangladesh', '8:30 am - 10:30 pm'),
+
+('PH010', 'BDH010', 'Dhaka, Bangladesh', '9:30 am - 9:30 pm'),
+
+('PH011', 'BDH011', 'Dhaka, Bangladesh', '10 am - 9 pm'),
+
+('PH012', 'BDH012', 'Dhaka, Bangladesh', '9 am - 10 pm'),
+
+('PH013', 'BDH013', 'Dhaka, Bangladesh', '10:30 am - 8:30 pm'),
+
+('PH014', 'BDH014', 'Dhaka, Bangladesh', '9:30 am - 9:30 pm'),
+
+('PH015', 'BDH015', 'Dhaka, Bangladesh', '8:30 am - 10:30 pm'),
+
+('PH016', 'BDH016', 'Dhaka, Bangladesh', '9 am - 10 pm');
+
+\end{lstlisting}
+
+\textbf{Query for showing all the data from Pharmacy table: }
+\begin{lstlisting}
+SELECT * FROM medilink.Patients;
+\end{lstlisting}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{pharmacy.PNG}
+    \caption{Showing The Patients Table All Data}
+    \label{fig:1}
+\end{figure}
+
+
+\textbf{Sample data input from Patients:}
+
+\begin{lstlisting}
+
+INSERT INTO Patient (P_id, P_name, P_age, P_gender, P_address, P_bloodGroup, Prescription_Id) 
+VALUES
+
+("P001", "Jack Smith", '23', 'M', '1016/A, Khilgaon, Dhaka', 'O-', 'Pr001'),
+
+("P002", "Emily Johnson", '35', 'F', '1234/B, Gulshan, Dhaka', 'A+', 'Pr002'),
+
+("P003", "Michael Williams", '45', 'M', '5678/C, Dhanmondi, Dhaka', 'B-', 'Pr003'),
+
+("P004", "Sophia Brown", '30', 'F', '9876/D, Banani, Dhaka', 'AB+', 'Pr004'),
+
+("P005", "William Jones", '28', 'M', '5432/E, Uttara, Dhaka', 'O+', 'Pr005'),
+
+("P006", "Olivia Wilson", '29', 'F', '2468/F, Mirpur, Dhaka', 'A-', 'Pr006'),
+
+("P007", "Liam Taylor", '31', 'M', '1357/G, Mohakhali, Dhaka', 'B+', 'Pr007'),
+
+("P008", "Emma Anderson", '27', 'F', '8642/H, Baridhara, Dhaka', 'AB-', 'Pr008'),
+
+("P009", "Noah Martinez", '40', 'M', '9753/I, Khilkhet, Dhaka', 'O-', 'Pr009'),
+
+("P010", "Ava Brown", '33', 'F', '6429/J, Pallabi, Dhaka', 'A+', 'Pr010'),
+
+\end{lstlisting}
+
+\textbf{Query for showing all the data from Patients table: }
+
+SELECT * FROM medilink.patients;
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{patients.PNG}
+    \caption{Showing The Patients Table All Data}
+    \label{fig:1}
+\end{figure}
+
+
+
+\textbf{Sample data input from blood donor:}
+
+\begin{lstlisting}
+INSERT INTO Blood Donor 
+(BlDo_Id, fName, lname, Age, Gender, BloodGroup, Address, 
+
+PhoneNo, LastDonated) VALUES
+
+("BlDo001", "Arefin", "Amin", 23, 'M', 'O-', '1016/A, Khilgaon, Dhaka', '01566998877', '2023-04-15'),
+
+("BlDo002", "Fatema", "Elma", 35, 'F', 'O+', '47/B, Gulshan, Dhaka', '01777889900', '2022-12-28'),
+
+("BlDo003", "Iszaz", "Rafid", 45, 'M', 'B+', '392/C, Dhanmondi, Dhaka', '01688990011', '2023-01-10'),
+
+("BlDo004", "Sabbir", "Hossain", 13, 'M', 'A+', '655/Tilpapra, Dhaka', '01899001122', '2023-02-05'),
+
+("BlDo005", "Nazia", "Khanom", 27, 'F', 'AB-', '109/KK, Sabujbagh, Dhaka', '01555667788', '2023-03-20'),
+
+("BlDo006", "Rahim", "Ali", 50, 'M', 'O-', '876/KS, New Market, Dhaka', '01666778899', '2023-04-18'),
+
+("BlDo007", "Shabnam", "Jahan", 31, 'F', 'B-', '432/KR, Sabujbagh, Dhaka', '01777889900', '2023-05-01'),
+
+("BlDo008", "Imran", "Chowdhury", 22, 'M', 'A+', '109/KQ, Kalbaga, Dhaka', '01988990011', '2023-06-24'),
+
+("BlDo009", "Tasnim", "Islam", 38, 'F', 'O+', '876/KP, Pallabi, Dhaka', '01599001122', '2023-07-10'),
+
+("BlDo010", "Rahat", "Kabir", 29, 'M', 'AB+', '432/KO, Chawkbazar, Dhaka', '01811223344', '2023-08-05'),
+
+\end{lstlisting}
+
+\textbf{Query for showing all the data from blood donor table: }
+\begin{lstlisting}
+SELECT * FROM medilink.blood donor;
+\end{lstlisting}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{blood_donor.PNG}
+    \caption{Showing The blood donor Table All Data}
+    \label{fig:1}
+\end{figure}
+
+
+
+\textbf{Sample data input from consultation:}
+
+INSERT INTO consultation 
+
+
+
+\textbf{Query for showing all the data from consultation table: }
+
+\begin{lstlisting}
+
+INSERT INTO Consultation (DoctorID, PatientID, Consulation_time, Disease)
+VALUES
+
+("D045", "P267", '10:00', 'Chickenpox'),
+
+("D200", "P004", '08:00', 'Gastritis'),
+
+("D134", "P124", '22:30', 'Hepatitis'),
+
+("D065", "P345", '18:45', 'Gastric Ulcer'),
+
+("D099", "P021", '14:15', 'Anxiety'),
+
+("D176", "P197", '09:30', 'Arthritis'),
+
+("D087", "P111", '17:20', 'Depression'),
+
+("D029", "P396", '20:10', 'Eczema'),
+
+("D051", "P250", '16:40', 'Hypertension'),
+
+("D103", "P072", '11:50', 'Influenza'),
+
+("D148", "P388", '13:25', 'Lupus'),
+
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{cosultation.PNG}
+    \caption{Showing The consultation Table All Data}
+    \label{fig:1}
+\end{figure}
+
+
+
+
+\subsection{Data Manipulation}
+
+\textbf{Query - 1 [Identifying disease]:}
+
+\begin{lstlisting}
+
+use medilink;
+
+SELECT Disease, 
+
+COUNT(*) AS matches
+
+FROM symptoms
+where
+symptom="Pale skin"
+or symptom="Shortness of breath"
+or symptom="Fatigue"
+or symptom="Pale skin"
+or symptom="Shortness of breath"
+
+GROUP BY Disease
+
+ORDER BY matches DESC
+LIMIT 1;
+
+\end{lstlisting}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Identifyingdisease.png}
+    \caption{For Identifying Disease}
+    \label{fig:1}
+\end{figure}
+
+
+
+
+\textbf{Query - 2 [finding doctor and hospital suited to patient disease]:}
+
+\begin{lstlisting}
+
+use medilink;
+
+select Dname,Hospitalname,Location,certificates,ConsultantionHours,visit 
+
+from doctor full join hospital on(Hospitalid=Id) and Specialization=any(select TreatedBy from symptoms  where Disease="Anemia");
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Forfindingdoctor.png}
+    \caption{For finding doctors}
+    \label{fig:1}
+\end{figure}
+
+\textbf{Query - 3 [finding Medicine according to disease and where the medicine can be found throughout the country]:}
+
+\begin{lstlisting}
+use medilink; 
+select m.MedName,m.mPrice,p.location,h.HospitalName as Pharmacy_Location,ma.Quantity 
+FROM medicine m left join medicine_availability ma 
+on(ma.MedID=m.MedID) left join pharmacy p on (p.PharmID=ma.PharmID) 
+
+
+left join hospital h on(h.Id=p.HospID) where medtype=
+any(select Required_Medicine from symptoms where Disease='Anemia') and ma.quantity is not null;
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Finding Medicine .png}
+    \caption{For finding medicine}
+    \label{fig:1}
+\end{figure}
+
+
+\textbf{Query - 4 [finding Prescriptions prescribed to Patient]:}
+
+\begin{lstlisting}
+SELECT p.p_id AS patientId,
+       CONCAT(p.p_fname, ' ', p.p_lname) AS patientname,
+       d.Did AS doctorId,
+       d.Dname,
+       pr.MD_content
+FROM prescription pr
+LEFT JOIN doctor d ON pr.D_id = d.did
+LEFT JOIN patients p ON pr.P_id = p.P_id
+WHERE p.P_id = "P038"
+GROUP BY d.did, pr.MD_content;
+
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Prescription.png}
+    \caption{For finding prescriptions}
+    \label{fig:1}
+\end{figure}
+
+\textbf{Query - 5 [Seeing doctors and their reviews per patient]:}
+
+
+\begin{lstlisting}
+USE medilink; 
+SELECT d.dname,COUNT(r.review) AS total_reviews, AVG(r.rating) AS  average_rating,GROUP_CONCAT(r.review SEPARATOR '; ') AS reviews,
+GROUP_CONCAT(p.P_Fname , ' ',p.P_Lname) as reviewed_by FROM doctor d JOIN review r 
+ON d.did = r.d_id join patients p on(p.P_id=r.P_id) GROUP BY  d.dname;
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Doctors and reviews.png}
+    \caption{For looking at doctors and their reviews}
+    \label{fig:1}
+\end{figure}
+
+
+
+\textbf{Query - 6 [All the blood donor for a Specific Patient]:}
+\begin{lstlisting}
+USE medilink; 
+select bd.fname, bd.phoneNo, bd.lastDonated, bd.BloodGroup
+from blood_donor bd 
+join  patients p on bd.BloodGroup = p.P_BloodGroup and p.P_id = "P333"
+order by bd.lastDonated asc 
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Query [Find Blood Donor].png}
+    \caption{For finding Blood Donor}
+    \label{fig:1}
+\end{figure}
+
+
+\textbf{Query -7 [All delivery tracking for a Specific Patient]:}
+\begin{lstlisting}
+SELECT d.de_id, d.de_content, d.de_status
+FROM delivery d
+JOIN patients p ON d.P_id = p.P_id
+WHERE p.P_id = 'P050'
+ORDER BY d.de_status;
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Query [Tracking The delivery of a specific Patient].PNG}
+    \caption{Tracking The delivery}
+    \label{fig:1}
+\end{figure}
+
+
+
+\textbf{Query 8 - [Finding all the specialized doctor in a specific area]:}
+\begin{lstlisting}
+SELECT d.dname, d.Certificates, d.ConsultantionHours, d.Visit, h.HospitalName 
+
+from doctor d
+
+join hospital h on d.HospitalID = h.ID 
+
+where d.Specialization ='Cardiology' and h.city ='Dhaka' and h.area='Dhanmondi'
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Query [Finding Specialized Doctor in Specific Area].PNG}
+    \caption{Finding Specialized Doctor in area}
+    \label{fig:1}
+\end{figure}
+
+
+\textbf{Query 9 - Finding Pharmacy in Specific Area within time range]:}
+\begin{lstlisting}
+SELECT h.HospitalName, p.open as 'Open-Close'
+from pharmacy p 
+join hospital h on p.HospID = h.ID 
+where h.city ='Dhaka' and h.area='Dhanmondi' and p.open = '9:30 am - 9:30 pm'
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Query [Finding Pharmacy in Specific Area within time range].PNG}
+    \caption{Finding Pharmacy in area with time range}
+    \label{fig:1}
+\end{figure}
+
+
+
+\textbf{Query 10  - [Which Medicine is low in stock in which pharmacy]:}
+\begin{lstlisting}
+SELECT * 
+FROM medicine_availability ma 
+JOIN pharmacy p  ON  p.PharmID = ma.PharmID 
+WHERE quantity < (SELECT AVG(quantity) 
+FROM medicine_availability) 
+GROUP BY ma.MedID, ma.PharmID; 
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Query [Which Medicine is low in stock in which pharmacy].PNG}
+    \caption{Which Medicine is low in stock in which pharmacy}
+    \label{fig:1}
+\end{figure}
+
+
+\textbf{Query - 11 [Find the Doctors with review who have more than average rating]:}
+\begin{lstlisting}
+select d.DName,d.Hospitalid,d.certificates,d.specialization,r.review,r.rating 
+
+from doctor d  inner join review r on(d.Did=r.d_id) 
+
+where rating>(select avg(rating) 
+
+			 from review 
+    ); 
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Query [ Find the Doctors with review who have more than average rating].PNG}
+    \caption{which doctors have more than average rating}
+    \label{fig:1}
+\end{figure}
+
+
+
+
+\textbf{Query - 12 [List all patients with specific disease]:}
+
+\begin{lstlisting}
+select * 
+from patients p 
+join consultation c on p.p_id = c.PatientID where c.disease ='Atrial Fibrillation' 
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Query [List all patients with specific disease].PNG}
+    \caption{List all patients with specific disease}
+    \label{fig:1}
+\end{figure}
+
+
+
+
+
+
+
+\textbf{Query 13 - [Which medicine is prescribed how many times]:}
+
+\begin{lstlisting}
+select p.md_content, count(p.md_content) as Med_Count 
+from prescription p 
+join consultation c on p.p_id = c.Patientid 
+group by p.MD_content 
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Query [Which medicine is prescribed how many times].PNG}
+    \caption{Which medicine is prescribed how many times}
+    \label{fig:1}
+\end{figure}
+
+
+
+\textbf{Query 14 - [Currently popular pharmacy in specific Area]:}
+
+\begin{lstlisting}
+SELECT p.PharmID, COUNT(d.ph_ID) AS 'popularity_count' 
+FROM pharmacy p 
+JOIN delivery d ON p.PharmID = d.ph_ID 
+WHERE p.HospID IN ( 
+    SELECT h.Id 
+    FROM hospital h 
+    WHERE h.City = 'Dhaka' AND h.Area = 'Dhanmondi' 
+) 
+GROUP BY p.PharmID
+ORDER BY COUNT(d.ph_ID) DESC; 
+\end{lstlisting}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Query [Currently popular pharmacy in specific Area].PNG}
+    \caption{Currently popular pharmacy in specific Area}
+    \label{fig:1}
+\end{figure}
+
+
+
+\textbf{Query 15 - [Viewing specific prescription information]:}
+\begin{lstlisting}
+select * 
+from prescription p 
+where p.pr_id = 'Pr004' 
+\end{lstlisting}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Query [Viewing specific prescription information].PNG}
+    \caption{Viewing specific prescription information}
+    \label{fig:1}
+\end{figure}
+
+\textbf{Query 16 - [Query to find the top 3 hospitals with the most available medicines]:}
+
+\begin{lstlisting}
+USE medilink;
+
+SELECT h.HospitalName, COUNT(ma.MedID) AS TotalMedicines
+FROM hospital h 
+JOIN pharmacy p ON h.Id = p.HospID 
+JOIN medicine_availability ma ON p.PharmID = ma.PharmID 
+GROUP BY h.HospitalName 
+ORDER BY TotalMedicines DESC 
+LIMIT 3; 
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{query_last.png}
+    \caption{Query to find the top 3 hospitals with the most available medicines}
+    \label{fig:1}
+\end{figure}
+
+
+\section{Data Manipulation(update/Delete)}
+\textbf{Query 17 - [Updating quantity of medicine in a pharmacy]:}
+
+\begin{lstlisting}
+update medicine_availability 
+set quantity=20 
+where PharmID='PH001' and MedID='MD100'; 
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Update quantity.PNG}
+    \caption{Updating quantity of medicine in a pharmacy}
+    \label{fig:1}
+\end{figure}
+
+\textbf{Query 18 - [Query to Update Doctor information]:}
+
+\begin{lstlisting}
+update doctor set visit=500 ,Certificates='FCPS'
+where DId='D001';
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Update doctor.png}
+    \caption{Query to Update Doctor information}
+    \label{fig:1}
+\end{figure}
+
+\textbf{Query 19 - [Query to remove a hospital]:}
+\begin{lstlisting}
+delete from hospital where id="BDH001";
+\end{lstlisting}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Remove hospital.png}
+    \caption{Query to remove a hospital}
+    \label{fig:1}
+\end{figure}
+
+\textbf{Query 20 - [Query to remove medicine availability based on a condition]:}
+\begin{lstlisting}
+DELETE FROM medicine_availability 
+WHERE MedID IN (
+    SELECT MedID
+    FROM medicine
+    WHERE mprice = (SELECT MIN(De_price) FROM delivery)
+)
+AND PharmID = (SELECT PharmID FROM delivery WHERE De_price = (SELECT MIN(De_price) FROM delivery));
+\end{lstlisting}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{delete_medicine_availability.png}
+    \caption{Query to remove medicine availability based on a condition}
+    \label{fig:1}
+\end{figure}
+
+\section{Conclusions}
+The development of a user-friendly healthcare database tailored for Dhaka residents represents a significant advancement in enhancing access to healthcare services in the region. This project successfully created an intuitive interface with robust regional search functionality, enabling users to easily locate nearby healthcare providers, including doctors, pharmacies, and alternative healthcare options. Comprehensive doctor profiles, featuring detailed information on specialties, services, and patient reviews, empower residents to make informed decisions about their healthcare. The inclusion of a rating system based on expertise and patient satisfaction promotes transparency, trust, and a higher standard of care by enabling users to evaluate and compare healthcare providers effectively.
+
+Additionally, the integration of pharmacy information allows users to check the availability of medicines at nearby locations, ensuring they can find essential medications with ease. The platform also caters to a broader spectrum of healthcare needs by including categories for pet doctors, homeopathic practitioners, and enthusiastic blood donors, facilitating quick access to alternative healthcare options and vital blood donation information during emergencies. This comprehensive approach ensures that users have access to a wide range of healthcare services and information, tailored to their specific needs.
+
+The meticulous design of a well-structured database schema and a detailed data model outlining the relationships between different entities ensures efficient storage and retrieval of healthcare information. Sample data population was used to demonstrate the database's functionality and facilitate thorough testing. Our quality assurance reports confirm that the database maintains high standards of data integrity, consistency, and performance, providing a reliable and robust platform for users.
+In conclusion, our healthcare database for Dhaka residents not only simplifies the process of finding and accessing healthcare services but also significantly enhances the overall quality of care through informed decision-making and user feedback. By streamlining healthcare information and making it easily accessible, this platform contributes to the well-being of Dhaka residents, offering a reliable, user-friendly tool that addresses the diverse healthcare needs of the community. This project exemplifies the potential for technology to improve healthcare accessibility and quality, setting a benchmark for future initiatives in the field.
+
+\section{Acknowledgements}
+\begin{enumerate}
+    \item We express our sincere gratitude to our Instructor for assigning this project and providing guidance throughout.
+    \item Special thanks to our four-person team for their collaborative effort in developing this healthcare database.
+    \item our team deserves recognition for their dedication and expertise in designing and implementing the database.
+    \item we extend our thanks to the users who will benefit from this platform, as their well-being and ease of access to healthcare services are the ultimate goals of our efforts.
+\end{enumerate} 
+
+
+
+\newpage
+\printbibliography
+\end{document}
